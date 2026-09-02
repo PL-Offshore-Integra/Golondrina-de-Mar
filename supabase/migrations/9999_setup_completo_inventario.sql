@@ -1,8 +1,11 @@
 -- COPIA COMBINADA PARA PEGAR DE UNA SOLA VEZ EN EL SQL EDITOR DE SUPABASE.
--- Es la union, en orden, de 0002_inventario.sql + 0003_seed_inventario.sql.
--- Correr una sola vez; no volver a correr este archivo (ni los dos
--- originales) despues de haberlo corrido, porque "create table" fallaria
--- al encontrar las tablas ya creadas.
+-- Es la union, en orden, de 0001_init.sql (crea el esquema) +
+-- 0002_inventario.sql + 0003_seed_inventario.sql. Correr una sola vez; no
+-- volver a correr este archivo (ni los originales) despues de haberlo
+-- corrido, porque "create table" fallaria al encontrar las tablas ya
+-- creadas.
+
+create schema if not exists golondrina_de_mar;
 --
 -- Modulo de inventario: maquinas.
 -- Las cantidades solo se modifican a traves de inventario_movimientos (alta/baja
