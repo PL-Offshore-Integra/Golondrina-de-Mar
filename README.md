@@ -30,12 +30,25 @@ Las tablas de este buque viven en el esquema `golondrina_de_mar` (no en
 Supabase compartido (ej. `comercial`, `proveedores`).
 
 1. Abrir el SQL Editor del proyecto Supabase.
-2. Correr `supabase/migrations/0001_init.sql` (crea el esquema; agregar ahi
-   las tablas propias de este buque a medida que se definan).
+2. Correr en orden `0001_init.sql`, `0002_inventario.sql` y
+   `0003_seed_inventario.sql` (el ultimo carga los datos migrados desde el
+   Excel de inventario de maquinas — se puede omitir si se prefiere
+   arrancar vacio).
 3. En **Project Settings > API > Exposed schemas**, agregar
    `golondrina_de_mar` a la lista de esquemas expuestos (por defecto solo
    `public` esta expuesto), o el cliente de Supabase no va a poder
    leer/escribir estas tablas.
+
+## Modulo de inventario
+
+- **Ubicaciones** y **motivos de movimiento** son catalogos editables desde
+  `/catalogos` (sin tocar la base a mano).
+- La **cantidad** de un item nunca se edita directamente: se ajusta
+  solamente a traves de "Reportar cambio de inventario" (alta o baja, con
+  motivo y detalle libre), que queda registrado en
+  `inventario_movimientos` y actualiza el stock por trigger. El resto de
+  los campos del item (nombre, ubicacion, comentarios, etc.) se edita
+  directo desde la ficha del item.
 
 ## Usuarios (login)
 
@@ -58,7 +71,12 @@ persona. Cualquier usuario de Supabase Auth del proyecto puede loguearse
 - `app/login` — pantalla de acceso (Supabase Auth, email + contrasena).
 - `app/(app)/layout.tsx` — exige sesion activa y arma el shell (barra
   superior + sidebar + encabezado de pantalla).
-- `app/(app)/page.tsx` — pantalla de inicio (placeholder, a completar).
+- `app/(app)/page.tsx` — pantalla de inicio, con accesos rapidos a los modulos.
+- `app/(app)/inventario/maquinas` — listado por ubicacion, alta/edicion de
+  items y reporte de movimientos.
+- `app/(app)/catalogos` — administracion de ubicaciones y motivos.
+- `components/InventarioLista.tsx`, `InventarioItemForm.tsx`,
+  `InventarioMovimientoForm.tsx` — UI del modulo de inventario.
 - `components/Shell.tsx` — navegacion y encabezado, estilo PL Offshore.
 - `proxy.ts` — refresca la sesion de Supabase en cada request (antes
   `middleware.ts`; Next.js 16 renombro la convencion a "Proxy").
