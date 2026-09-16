@@ -41,6 +41,15 @@ Supabase compartido (ej. `comercial`, `proveedores`).
 
 ## Modulo de inventario
 
+Tres categorias de items, en la misma tabla (`inventario_items.categoria`):
+`maquinas` (herramientas y repuestos), `towing_gear` (elementos de
+remolque, con WLL/MBL, fabricante y fecha de certificado) y `cubierta`
+(pañol y elementos de cubierta: amarre, LSA, pintura, ferreteria y
+consumibles). `cubierta` reutiliza el layout simple de `maquinas` (sin
+WLL/MBL ni certificado), con el campo de agrupacion rotulado "Grupo /
+Rubro". La `categoria` es texto libre en la base (sin CHECK), asi que
+sumar categorias no requiere migracion de esquema.
+
 - **Ubicaciones** y **motivos de movimiento** son catalogos editables desde
   `/catalogos` (sin tocar la base a mano).
 - La **cantidad** de un item nunca se edita directamente: se ajusta
@@ -72,7 +81,8 @@ persona. Cualquier usuario de Supabase Auth del proyecto puede loguearse
 - `app/(app)/layout.tsx` — exige sesion activa y arma el shell (barra
   superior + sidebar + encabezado de pantalla).
 - `app/(app)/page.tsx` — pantalla de inicio, con accesos rapidos a los modulos.
-- `app/(app)/inventario/maquinas` — listado por ubicacion, alta/edicion de
+- `app/(app)/inventario/maquinas`, `app/(app)/inventario/towing-gear` y
+  `app/(app)/inventario/cubierta` — listado por ubicacion, alta/edicion de
   items y reporte de movimientos.
 - `app/(app)/catalogos` — administracion de ubicaciones y motivos.
 - `components/InventarioLista.tsx`, `InventarioItemForm.tsx`,

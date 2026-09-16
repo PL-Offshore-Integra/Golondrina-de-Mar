@@ -17,8 +17,14 @@ function num(formData: FormData, key: string, fallback = 0): number {
   return Number.isFinite(parsed) ? parsed : fallback;
 }
 
-function listPath(_categoria: Categoria) {
-  return "/inventario/maquinas";
+const LIST_PATHS: Record<Categoria, string> = {
+  maquinas: "/inventario/maquinas",
+  towing_gear: "/inventario/towing-gear",
+  cubierta: "/inventario/cubierta",
+};
+
+function listPath(categoria: Categoria) {
+  return LIST_PATHS[categoria] ?? LIST_PATHS.maquinas;
 }
 
 function itemFields(formData: FormData) {

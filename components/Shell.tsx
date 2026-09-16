@@ -42,13 +42,33 @@ const ICONS = {
       <path d="M8 9h8M8 13h8M8 17h5" />
     </>
   ),
+  towing: (
+    <>
+      <circle cx="7" cy="17" r="2.5" />
+      <circle cx="17" cy="7" r="2.5" />
+      <path d="M9 15.5 15 8.5" />
+    </>
+  ),
+  deck: (
+    <>
+      <circle cx="12" cy="5" r="1.5" />
+      <path d="M12 6.5V21" />
+      <path d="M8 9h8" />
+      <path d="M5 12a7 7 0 0 0 14 0" />
+      <path d="M5 12H3M19 12h2" />
+    </>
+  ),
 };
 
 const NAV: NavGroup[] = [
   { titulo: "General", items: [{ href: "/", label: "Inicio", icon: "home" }] },
   {
     titulo: "Inventario",
-    items: [{ href: "/inventario/maquinas", label: "Inventario Maquinas", icon: "gear" }],
+    items: [
+      { href: "/inventario/maquinas", label: "Inventario Maquinas", icon: "gear" },
+      { href: "/inventario/towing-gear", label: "Inventario Towing Gear", icon: "towing" },
+      { href: "/inventario/cubierta", label: "Inventario Cubierta", icon: "deck" },
+    ],
   },
   { titulo: "Catalogos", items: [{ href: "/catalogos", label: "Ubicaciones y motivos", icon: "catalog" }] },
 ];
@@ -59,6 +79,16 @@ const SECCIONES: Record<string, { grupo: string; titulo: string; sub: string }> 
     grupo: "Inventario",
     titulo: "Inventario Maquinas",
     sub: "Herramientas y repuestos del buque, por ubicacion.",
+  },
+  "/inventario/towing-gear": {
+    grupo: "Inventario",
+    titulo: "Inventario Towing Gear",
+    sub: "Elementos de remolque: cables, grilletes, placas, con certificacion y WLL/MBL.",
+  },
+  "/inventario/cubierta": {
+    grupo: "Inventario",
+    titulo: "Inventario Cubierta",
+    sub: "Elementos y pañol de cubierta: amarre, LSA, pintura, ferreteria y consumibles, por ubicacion.",
   },
   "/catalogos": {
     grupo: "Catalogos",
@@ -77,6 +107,24 @@ function seccionFor(pathname: string) {
       return { grupo: "Inventario", titulo: "Reportar cambio de inventario", sub: "" };
     }
     return { grupo: "Inventario", titulo: "Editar item - Maquinas", sub: "" };
+  }
+  if (pathname.startsWith("/inventario/towing-gear/")) {
+    if (pathname.endsWith("/nueva")) {
+      return { grupo: "Inventario", titulo: "Nuevo item - Towing Gear", sub: "" };
+    }
+    if (pathname.endsWith("/movimiento")) {
+      return { grupo: "Inventario", titulo: "Reportar cambio de inventario", sub: "" };
+    }
+    return { grupo: "Inventario", titulo: "Editar item - Towing Gear", sub: "" };
+  }
+  if (pathname.startsWith("/inventario/cubierta/")) {
+    if (pathname.endsWith("/nueva")) {
+      return { grupo: "Inventario", titulo: "Nuevo item - Cubierta", sub: "" };
+    }
+    if (pathname.endsWith("/movimiento")) {
+      return { grupo: "Inventario", titulo: "Reportar cambio de inventario", sub: "" };
+    }
+    return { grupo: "Inventario", titulo: "Editar item - Cubierta", sub: "" };
   }
   return { grupo: "Golondrina de Mar", titulo: "Golondrina de Mar", sub: "" };
 }

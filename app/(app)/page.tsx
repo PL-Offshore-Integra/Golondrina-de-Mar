@@ -9,6 +9,18 @@ export default function Home() {
           Maquinas
         </div>
       </Link>
+      <Link href="/inventario/towing-gear" className="stat" style={{ cursor: "pointer" }}>
+        <div className="stat-label">Inventario</div>
+        <div className="stat-value" style={{ fontSize: 18 }}>
+          Towing Gear
+        </div>
+      </Link>
+      <Link href="/inventario/cubierta" className="stat" style={{ cursor: "pointer" }}>
+        <div className="stat-label">Inventario</div>
+        <div className="stat-value" style={{ fontSize: 18 }}>
+          Cubierta
+        </div>
+      </Link>
       <Link href="/catalogos" className="stat" style={{ cursor: "pointer" }}>
         <div className="stat-label">Catalogos</div>
         <div className="stat-value" style={{ fontSize: 18 }}>

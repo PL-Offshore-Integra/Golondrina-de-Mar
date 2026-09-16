@@ -6,12 +6,16 @@ export default function InventarioItemForm({
   ubicaciones,
   columnasTowing,
   esNuevo,
+  grupoLabel = "Grupo / Sistema",
+  grupoPlaceholder = "Ej. MMPP MAK 8 M",
 }: {
   action: (formData: FormData) => void;
   item?: InventarioItem;
   ubicaciones: Ubicacion[];
   columnasTowing?: boolean;
   esNuevo?: boolean;
+  grupoLabel?: string;
+  grupoPlaceholder?: string;
 }) {
   return (
     <form action={action} className="card" style={{ maxWidth: 760 }}>
@@ -63,8 +67,8 @@ export default function InventarioItemForm({
         )}
         {!columnasTowing && (
           <div className="fg">
-            <label>Grupo / Sistema</label>
-            <input name="grupo" defaultValue={item?.grupo ?? ""} placeholder="Ej. MMPP MAK 8 M" />
+            <label>{grupoLabel}</label>
+            <input name="grupo" defaultValue={item?.grupo ?? ""} placeholder={grupoPlaceholder} />
           </div>
         )}
         {esNuevo && (

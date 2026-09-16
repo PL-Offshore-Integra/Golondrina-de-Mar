@@ -1,4 +1,4 @@
-export type Categoria = "maquinas";
+export type Categoria = "maquinas" | "towing_gear" | "cubierta";
 
 export type EstadoItem = "activo" | "cuarentena" | "baja";
 
