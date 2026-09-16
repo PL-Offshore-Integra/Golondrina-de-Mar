@@ -18,7 +18,7 @@ PL Offshore.
 ```bash
 npm install
 cp .env.local.example .env.local
-# completar NEXT_PUBLIC_SUPABASE_ANON_KEY y SUPABASE_SERVICE_ROLE_KEY
+# completar NEXT_PUBLIC_SUPABASE_ANON_KEY
 # desde https://supabase.com/dashboard/project/mwrhonkvcyyueixbdrat/settings/api
 npm run dev
 ```
